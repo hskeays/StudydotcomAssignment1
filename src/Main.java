@@ -5,6 +5,7 @@ import java.util.Scanner;
 class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        String input;
         // Create 2d array of States/Capitals
         String[][] stateCapitals = {
                 {"Alabama", "Montgomery"},
@@ -63,22 +64,21 @@ class Main {
         singleCapitalTest(stateCapitals);
 
         // Prompt user to enter a keyword to continue the program
-        System.out.print("\nType 'test' to take the full test: ");
-        String userInput = scanner.nextLine();
-
         // While user input does not equal keyword, prompt again
-        while (!userInput.equalsIgnoreCase("test")) {
-            System.out.print("Type 'test' to take the full test: ");
-            userInput = scanner.nextLine();
-        }
+        do {
+            System.out.print("\nType 'test' to take the full test: ");
+            input = scanner.nextLine();
+        } while (!input.equalsIgnoreCase("test"));
+
         // Else continue program
         allCapitalsTest(stateCapitals);
 
         // While user input does not equal keyword, prompt again
-        while (!userInput.equalsIgnoreCase("print")) {
+        do {
             System.out.print("Type 'print' to print the array sorted by state, then again by capital: ");
-            userInput = scanner.nextLine();
-        }
+            input = scanner.nextLine();
+        } while (!input.equalsIgnoreCase("print"));
+
         // Else continue program
         printArray(stateCapitals);
     }
@@ -86,12 +86,12 @@ class Main {
     public static void singleCapitalTest(String[][] stateCapitals) {
         Scanner scanner = new Scanner(System.in);
 
-        // Prompt user for capital name, store input in 'userInput'
+        // Prompt user for capital name, store input in 'input'
         System.out.print("Enter capital city name of a US state: ");
-        String userInput = scanner.nextLine();
+        String input = scanner.nextLine();
 
         // Store boolean value of whether user's input exists in array
-        boolean inputResult = elementExists(stateCapitals, userInput);
+        boolean inputResult = elementExists(stateCapitals, input);
 
         // Print appropriate response depending on user input result
         if (inputResult) {
@@ -118,20 +118,20 @@ class Main {
             System.out.println("Current score: " + score);
             System.out.println("Attempts: " + attempts);
             System.out.print("\nCapital city name: ");
-            String userInput = scanner.nextLine();
+            String input = scanner.nextLine();
 
             // Store boolean value of whether user's input exists in array
-            boolean inputResult = elementExists(stateCapitals, userInput);
+            boolean inputResult = elementExists(stateCapitals, input);
 
             // If ArrayList contains the user's input, answer already given, continue loop
-            if (prevAnswers.contains(userInput)) {
+            if (prevAnswers.contains(input)) {
                 System.out.println("You already named this capital! Try again!\n");
                 continue;
             }
 
             // If user input is correct, print result and adjust score/attempts values
             if (inputResult) {
-                prevAnswers.add(userInput);
+                prevAnswers.add(input);
                 System.out.println("Correct!\n");
                 score++;
                 attempts--;
