@@ -5,7 +5,6 @@ import java.util.Scanner;
 class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String input;
         // Create 2d array of States/Capitals
         String[][] stateCapitals = {
                 {"Alabama", "Montgomery"},
@@ -60,27 +59,25 @@ class Main {
                 {"Wyoming", "Cheyenne"}
         };
 
-        // Begin the first test
+        // Wait for user to press enter to continue program, else prompt again
+        waitForEnterKeyPress("Press enter to begin: ");
+
+        // Run single question state/capital city test
         singleCapitalTest(stateCapitals);
 
-        // Prompt user to enter a keyword to continue the program
-        // While user input does not equal keyword, prompt again
-        do {
-            System.out.print("\nPress enter to take the full test: ");
-            input = scanner.nextLine();
-        } while (!input.equals(""));
+        // Wait for user to press enter to continue program, else prompt again
+        waitForEnterKeyPress("\nPress enter to take the full test: ");
 
-        // Else continue program
+        // Run full 50 state/capital city test
         allCapitalsTest(stateCapitals);
 
-        // While user input does not equal keyword, prompt again
-        do {
-            System.out.print("Press enter to print the array sorted by state, then again by capital: ");
-            input = scanner.nextLine();
-        } while (!input.equals(""));
+        // Wait for user to press enter to continue program, else prompt again
+        waitForEnterKeyPress("\nPress enter to print the array sorted by state, then again by capital: ");
 
-        // Else continue program
+        // Print the array, sorted by state first, then sorted by capital city
         printArray(stateCapitals);
+
+        scanner.close();
     }
 
     public static void singleCapitalTest(String[][] stateCapitals) {
@@ -129,23 +126,22 @@ class Main {
                 continue;
             }
 
-            // If user input is correct, print result and adjust score/attempts values
+            // If user input is correct, print result and adjust score
             if (inputResult) {
                 prevAnswers.add(input);
                 System.out.println("Correct!\n");
                 score++;
-                attempts--;
             }
-            // Else user input is incorrect, print result and adjust score/attempts values
+            // Else user input is incorrect
             else {
                 System.out.println("Incorrect!\n");
-                attempts--;
             }
+            attempts--;
         }
 
         // Display final score
         System.out.println("Final score: " + score);
-        System.out.println("Thanks for playing!\n");
+        System.out.println("Thanks for playing!");
     }
 
     public static void printArray(String[][] stateCapitals) {
@@ -193,5 +189,16 @@ class Main {
                 }
             }
         }
+    }
+
+    private static void waitForEnterKeyPress(String prompt) {
+        // Method to wait for user to press enter to continue program
+        Scanner scanner = new Scanner(System.in);
+        String input;
+
+        do {
+            System.out.print(prompt);
+            input = scanner.nextLine();
+        } while (!input.isEmpty());
     }
 }
