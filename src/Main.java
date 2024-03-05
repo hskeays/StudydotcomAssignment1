@@ -165,7 +165,7 @@ class Main {
         // Return true if element exists in array
         for (String[] row : array) {
             for (String element : row) {
-                if (element.equalsIgnoreCase(target)) {
+                if (element.equals(target)) {
                     return true;
                 }
             }
