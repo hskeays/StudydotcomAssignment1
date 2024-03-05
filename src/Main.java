@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         // Create 2d array of States/Capitals
         String[][] stateCapitals = {
                 {"Alabama", "Montgomery"},
@@ -76,8 +75,6 @@ class Main {
 
         // Print the array, sorted by state first, then sorted by capital city
         printArray(stateCapitals);
-
-        scanner.close();
     }
 
     public static void singleCapitalTest(String[][] stateCapitals) {
@@ -191,8 +188,8 @@ class Main {
         }
     }
 
-    private static void waitForEnterKeyPress(String prompt) {
-        // Method to wait for user to press enter to continue program
+    public static void waitForEnterKeyPress(String prompt) {
+        // Wait for user to press enter to continue program
         Scanner scanner = new Scanner(System.in);
         String input;
 
