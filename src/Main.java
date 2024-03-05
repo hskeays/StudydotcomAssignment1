@@ -66,18 +66,18 @@ class Main {
         // Prompt user to enter a keyword to continue the program
         // While user input does not equal keyword, prompt again
         do {
-            System.out.print("\nType 'test' to take the full test: ");
+            System.out.print("\nPress enter to take the full test: ");
             input = scanner.nextLine();
-        } while (!input.equalsIgnoreCase("test"));
+        } while (!input.equals(""));
 
         // Else continue program
         allCapitalsTest(stateCapitals);
 
         // While user input does not equal keyword, prompt again
         do {
-            System.out.print("Type 'print' to print the array sorted by state, then again by capital: ");
+            System.out.print("Press enter to print the array sorted by state, then again by capital: ");
             input = scanner.nextLine();
-        } while (!input.equalsIgnoreCase("print"));
+        } while (!input.equals(""));
 
         // Else continue program
         printArray(stateCapitals);
