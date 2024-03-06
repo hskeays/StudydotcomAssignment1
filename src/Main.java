@@ -58,30 +58,36 @@ class Main {
                 {"Wyoming", "Cheyenne"}
         };
 
-        // Wait for user to press enter to continue program, else prompt again
-        waitForEnterKeyPress("Press enter to begin: ");
+        // Wait for user to press ENTER to continue program, else prompt again
+        waitForEnterKeyPress("Press ENTER to begin: ");
 
         // Run single question state/capital city test
         singleCapitalTest(stateCapitals);
 
-        // Wait for user to press enter to continue program, else prompt again
-        waitForEnterKeyPress("\nPress enter to take the full test: ");
+        // Wait for user to press ENTER to continue program, else prompt again
+        waitForEnterKeyPress("\nPress ENTER to take the full test: ");
 
         // Run full 50 state/capital city test
         allCapitalsTest(stateCapitals);
 
-        // Wait for user to press enter to continue program, else prompt again
-        waitForEnterKeyPress("\nPress enter to print the array sorted by state, then again by capital: ");
+        // Wait for user to press ENTER to continue program, else prompt again
+        waitForEnterKeyPress("\nPress ENTER to print the array sorted by state, then again by capital: ");
 
-        // Print the array, sorted by state first, then sorted by capital city
-        printArray(stateCapitals);
+        // Print the array, in its original order, ordered alphabetically by state name
+        printArray(stateCapitals, ">> Sorted by state name:");
+
+        // Use bubble sort algorithm to order the array alphabetically by capital name
+        bubbleSortByCapital(stateCapitals);
+
+        // Print the array again, now sorted alphabetically by capital name
+        printArray(stateCapitals, ">> Sorted by capital city name:");
     }
 
     public static void singleCapitalTest(String[][] stateCapitals) {
         Scanner scanner = new Scanner(System.in);
 
-        // Prompt user for capital name, store input in 'input'
-        System.out.print("Enter capital city name of a US state: ");
+        // Prompt user for capital name, store user input in 'input'
+        System.out.print("Enter the capital city name of any US state: ");
         String input = scanner.nextLine();
 
         // Store boolean value of whether user's input exists in array
@@ -89,9 +95,9 @@ class Main {
 
         // Print appropriate response depending on user input result
         if (inputResult) {
-            System.out.println("Correct!");
+            System.out.println("\nCorrect!");
         } else {
-            System.out.println("Incorrect!");
+            System.out.println("\nIncorrect!");
         }
     }
 
@@ -111,10 +117,10 @@ class Main {
         while (attempts > 0) {
             System.out.println("Current score: " + score);
             System.out.println("Attempts: " + attempts);
-            System.out.print("\nCapital city name: ");
+            System.out.print("Capital city name: ");
             String input = scanner.nextLine();
 
-            // Store boolean value of whether user's input exists in array
+            // Store boolean value of whether user's input exists in array(is a correct answer)
             boolean inputResult = elementExists(stateCapitals, input);
 
             // If ArrayList contains the user's input, answer already given, continue loop
@@ -123,45 +129,39 @@ class Main {
                 continue;
             }
 
-            // If user input is correct, print result and adjust score
+            // If user input is correct, print result and increment score
             if (inputResult) {
                 prevAnswers.add(input);
-                System.out.println("Correct!\n");
+                System.out.println("\nCorrect!\n");
                 score++;
             }
             // Else user input is incorrect
             else {
-                System.out.println("Incorrect!\n");
+                System.out.println("\nIncorrect!\n");
             }
             attempts--;
         }
 
-        // Display final score
-        System.out.println("Final score: " + score);
-        System.out.println("Thanks for playing!");
+        // Display final score and ending message
+        System.out.println("Final score: " + score + "\nThanks for playing!");
     }
 
-    public static void printArray(String[][] stateCapitals) {
-        System.out.println("\n>>> Ordered by state name:");
-
-        // Print array sorted alphabetically by state name
+    public static void printArray(String[][] stateCapitals, String header) {
+        System.out.println(header);
+        // Print the array
         for (String[] stateCap : stateCapitals) {
             System.out.println(Arrays.toString(stateCap));
         }
-
-        // Call bubbleSort method to sort array alphabetically by capital name
-        bubbleSort(stateCapitals);
-
-        System.out.println("\n>>> Ordered by capital name:");
-
-        // Print array sorted alphabetically by capital name
-        for (String[] stateCap : stateCapitals) {
-            System.out.println(Arrays.toString(stateCap));
-        }
+        // Add space below printed array
         System.out.println();
     }
 
     public static boolean elementExists(String[][] array, String target) {
+        if (!target.isEmpty()) {
+            target = target.substring(0, 1).toUpperCase() + target.substring(1).toLowerCase();
+        } else {
+            return false;
+        }
         // Return true if element exists in array
         for (String[] row : array) {
             for (String element : row) {
@@ -174,7 +174,7 @@ class Main {
         return false;
     }
 
-    public static void bubbleSort(String[][] stateCapitals) {
+    public static void bubbleSortByCapital(String[][] stateCapitals) {
         // Alphabetically sorts 2d array based on capital name
         for (int i = 0; i < stateCapitals.length - 1; i++) {
             for (int j = 0; j < stateCapitals.length - i - 1; j++) {
@@ -189,7 +189,7 @@ class Main {
     }
 
     public static void waitForEnterKeyPress(String prompt) {
-        // Wait for user to press enter to continue program
+        // Wait for user to press ENTER to continue program
         Scanner scanner = new Scanner(System.in);
         String input;
 
