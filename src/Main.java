@@ -58,29 +58,29 @@ class Main {
                 {"Wyoming", "Cheyenne"}
         };
 
-        // Wait for user to press ENTER to continue program, else prompt again
-        waitForEnterKeyPress("Press ENTER to begin: ");
+        // Each call to this method waits for the user to press ENTER before proceeding
+        waitForEnterKeyPress("Press ENTER to print the array sorted by state:");
+
+        // Print the array, in its original order, ordered alphabetically by state name
+        printArray(stateCapitals);
+
+        // Use bubble sort algorithm to order the array alphabetically by capital name
+        bubbleSortByCapital(stateCapitals);
+
+        waitForEnterKeyPress("\nPress ENTER to print the array sorted by capital: ");
+
+        // Print the array again, now sorted by capital name
+        printArray(stateCapitals);
 
         // Run single question state/capital city test
         singleCapitalTest(stateCapitals);
 
-        // Wait for user to press ENTER to continue program, else prompt again
         waitForEnterKeyPress("\nPress ENTER to take the full test: ");
 
         // Run full 50 state/capital city test
         allCapitalsTest(stateCapitals);
 
-        // Wait for user to press ENTER to continue program, else prompt again
-        waitForEnterKeyPress("\nPress ENTER to print the array sorted by state, then again by capital: ");
-
-        // Print the array, in its original order, ordered alphabetically by state name
-        printArray(stateCapitals, ">> Sorted by state name:");
-
-        // Use bubble sort algorithm to order the array alphabetically by capital name
-        bubbleSortByCapital(stateCapitals);
-
-        // Print the array again, now sorted alphabetically by capital name
-        printArray(stateCapitals, ">> Sorted by capital city name:");
+        System.out.println("\nProgram complete.");
     }
 
     public static void singleCapitalTest(String[][] stateCapitals) {
@@ -143,16 +143,17 @@ class Main {
         }
 
         // Display final score and ending message
-        System.out.println("Final score: " + score + "\nThanks for playing!");
+        System.out.println("Final score: " + score + "/50" + "\nThanks for playing!");
     }
 
-    public static void printArray(String[][] stateCapitals, String header) {
-        System.out.println(header);
-        // Print the array
+    public static void printArray(String[][] stateCapitals) {
+        // Print the array with space above and below
+        System.out.println();
+
         for (String[] stateCap : stateCapitals) {
             System.out.println(Arrays.toString(stateCap));
         }
-        // Add space below printed array
+
         System.out.println();
     }
 
